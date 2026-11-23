@@ -13,7 +13,8 @@ GROUND_Y = 40
 class Ball:
     images = {}
     def get_bb(self):
-        return self.x - 10, self.y - 10, self.x + 10, self.y + 10
+        radius = self.radius
+        return self.x - radius, self.y - radius, self.x + radius, self.y + radius
 
     def __init__(self, x, y, direction, ball_type=1):
         if ball_type not in Ball.images:
@@ -41,5 +42,7 @@ class Ball:
         self.image.draw(self.x, self.y)
 
     def handle_collision(self, group, other):
-     if group == 'boy:ball':
-         game_world.remove_object(self)
+        if group == 'boy:ball':
+            game_world.remove_object(self)
+        elif group == 'ball:zombie':
+            game_world.remove_object(self)

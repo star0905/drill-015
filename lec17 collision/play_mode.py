@@ -43,7 +43,9 @@ def init():
     
     zombies = [Zombie() for _ in range(4)]
     game_world.add_objects(zombies, 1)
-
+    for zombie in zombies:
+        game_world.add_collision_pair('boy:zombie', boy, zombie)
+        game_world.add_collision_pair('ball:zombie', None, zombie)
 
 def pause():
     boy.pause()
@@ -61,6 +63,7 @@ def finish():
 
 def update():
     game_world.update()
+    game_world.handle_collision()
 
 def render():
     clear_canvas()
